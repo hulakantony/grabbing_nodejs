@@ -3,32 +3,116 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<link rel="stylesheet" href="public/chartist.min.css">
+	<link rel="stylesheet" href="public/styles/chartist.min.css">
+	<link rel="stylesheet" href="public/styles/home.css">
 </head>
 <body>
-	<div class="ct-chart ct-perfect-fourth"></div>
-	<script src="public/chartist.min.js"></script>
-	<script>
-		var data = {
-  // A labels array that can contain any sort of values
-		  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-		  // Our series array that contains series objects or in this case series data arrays
-		  series: [
-		    [5, 2, 4, 2, 0]
-		  ]
-		};
+	<div class="getDB-wrap">
+		<a href="#" id="get-charts">SHOW CHARTS</a>
+	</div>
+	<div class="currency-wrap">
+		<table class="cur-table">
+			<thead>
+				<tr>
+					<th>Ресурс</th>
+					<th>Покупка</th>
+					<th>Продажа</th>
+					<th>НБУ</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="finance-res">
+					<th>Finance.i.ua</th>
+					<td class="buy-td"></td>
+					<td class="sale-td"></td>
+					<td class="nbu-td"></td>
+				</tr>
+				<tr class="privat-res">
+					<th>Privat</th>
+					<td class="buy-td"></td>
+					<td class="sale-td"></td>
+					<td class="nbu-td"></td>
+				</tr>
+				<tr class="kurs-res">
+					<th>Kurs.com.ua</th>
+					<td class="buy-td"></td>
+					<td class="sale-td"></td>
+					<td class="nbu-td"></td>
+				</tr>
+			</tbody>
+		</table>
+		<span>Last updated: <span id="last-updated"></span></span>
+	</div>
+	<div class="charts-wrap">
+		<div class="chart-wrap">
+			<h3>Finace.i.ua</h3>
+			<div class="ct-chart ct-perfect-fourth" id="chart1"></div>		
+		</div>
+		<div class="chart-wrap">
+			<h3>Privat</h3>
+			<div class="ct-chart ct-perfect-fourth" id="chart2"></div>		
+		</div>
+		<div class="chart-wrap">
+			<h3>Kurs.com.ua</h3>
+			<div class="ct-chart ct-perfect-fourth" id="chart3"></div>		
+		</div>
+	</div>
+	
+	<script src="public/scripts/chartist.min.js"></script>
+	<script src="public/scripts/showCharts.js"></script>
+	<script src="public/scripts/connectToDB.js"></script>
 
-		var options = {
-		  width: 300,
-		  height: 200
-		};
-
-
-		// Create a new line chart object where as first parameter we pass in a selector
-		// that is resolving to our chart container element. The Second parameter
-		// is the actual data object.
-		new Chartist.Line('.ct-chart', data, options); 
-	</script>
+	<style type="text/css">
+		body{
+			min-height: 1000px
+		}
+		.ct-chart {
+			float: left;
+			position: static !important;
+		}
+		.ct-perfect-fourth>svg {
+			position: relative !important;
+		}
+		.charts-wrap{
+			display: flex;
+			justify-content: space-around;
+		}
+		.chart-wrap{
+			display: none;
+			flex-direction: column;
+			justify-content: center;
+			text-align: center;
+		}
+		.getDB-wrap{
+			text-align: center;
+		}
+		#get-charts{
+			display: inline-block;
+			padding: 10px;
+			text-decoration: none;
+			color: #fff;
+			font-weight: bold;
+			background: blue;
+			margin: 0 auto;
+			border-radius: 5px;
+			margin: 0 0 20px 0;
+		}
+		.show{
+			display: flex;
+		}
+		.currency-wrap{
+			text-align: center;
+		}
+		table {
+			margin: 0 auto;
+		}
+		table td, table th{
+			padding: 5px;
+			background: #ccc;
+			text-align: center;
+			border: 1px solid black;
+		}
+	</style>
 	
 </body>
 </html>

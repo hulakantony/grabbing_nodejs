@@ -1,0 +1,49 @@
+body{
+	min-height: 1000px
+}
+.ct-chart {
+	float: left;
+	position: static !important;
+}
+.ct-perfect-fourth>svg {
+	position: relative !important;
+}
+.charts-wrap{
+	display: flex;
+	justify-content: space-around;
+}
+.chart-wrap{
+	display: none;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+}
+.getDB-wrap{
+	text-align: center;
+}
+#get-charts{
+	display: inline-block;
+	padding: 10px;
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+	background: blue;
+	margin: 0 auto;
+	border-radius: 5px;
+	margin: 0 0 20px 0;
+}
+.show{
+	display: flex;
+}
+.currency-wrap{
+	text-align: center;
+}
+table {
+	margin: 0 auto;
+}
+table td, table th{
+	padding: 5px;
+	background: #ccc;
+	text-align: center;
+	border: 1px solid black;
+}
