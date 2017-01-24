@@ -1,13 +1,14 @@
 const cheerio = require('cheerio');
 const request = require('request');
-const Currency = require('../Currency');
+const Currency = require('../DBSchemas').Currency;
 
 const exec = require('./getDataFromPhantom');
 
 const finaceURL = 'http://finance.i.ua/';
 const privatURL = 'https://privatbank.ua/ru/';
 
-module.exports = function() {    
+module.exports = function() {   
+	 
     request(finaceURL,  function (error, response, body) {
 		if(!error) {
 			const $ = cheerio.load(body);

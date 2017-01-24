@@ -57,62 +57,71 @@
 			<div class="ct-chart ct-perfect-fourth" id="chart3"></div>		
 		</div>
 	</div>
-	
+	<form id="signin" method='post' action="/api/login">
+		<input type="text" required name="name" class="form-name">
+		<input type="password" name="password" required class="form-pass">
+		<input type="submit" name="" value="Sign in">
+		<button id="login">Login</button>
+	</form>
+	<script>
+		const form = document.getElementById('signin');
+		const login = document.getElementById('login');
+		function handleLogin(e){
+			e.preventDefault()
+			let form = e.target.parentElement;
+			let name = form.querySelector('.form-name').value;
+			let pass = form.querySelector('.form-pass').value;
+			
+			// fetch('http://localhost:5555/api/authenticate', {
+			// 	method: 'post',
+			// 	headers: {
+   //      			'Accept': 'application/json, text/plain, */*',
+   //      			'Content-Type': 'x-www-form-urlencoded'
+   //  			},
+   //  			body: 'foo=bar&lorem=ipsum'  
+			// })
+			// .then(response => {				
+			// 	return response.json()
+			// })
+			// .then(data => {
+			// 	console.log(data)
+			// })
+			var xhr = new XMLHttpRequest();
+
+			var body = 'name=' + encodeURIComponent(name) +
+			  '&password=' + encodeURIComponent(pass);
+
+			xhr.open("POST", 'http://localhost:5555/api/authenticate', true)
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+			xhr.onreadystatechange = function() {
+				if (this.readyState != 4) return;
+				const token = JSON.parse(this.responseText).token;		
+				window.location.href = `http://localhost:5555/?token=${token}`		
+			}
+
+			xhr.send(body);
+
+		}
+		login.addEventListener('click', handleLogin)
+		function handleSubmit(e){			
+			// let target = e.target;
+			// let name = target.querySelector('.form-name').value;
+			// let pass = target.querySelector('.form-pass').value;
+			// console.log(name, pass)
+			// fetch('http://localhost:5555/api/login', {
+			// 	method: 'POST',
+			// 	body: {
+			// 		name: name,
+			// 		password: pass
+			// 	}
+			// })
+		}
+		form.addEventListener('submit', handleSubmit)
+	</script>
 	<script src="public/scripts/chartist.min.js"></script>
 	<script src="public/scripts/showCharts.js"></script>
 	<script src="public/scripts/connectToDB.js"></script>
-
-	<style type="text/css">
-		body{
-			min-height: 1000px
-		}
-		.ct-chart {
-			float: left;
-			position: static !important;
-		}
-		.ct-perfect-fourth>svg {
-			position: relative !important;
-		}
-		.charts-wrap{
-			display: flex;
-			justify-content: space-around;
-		}
-		.chart-wrap{
-			display: none;
-			flex-direction: column;
-			justify-content: center;
-			text-align: center;
-		}
-		.getDB-wrap{
-			text-align: center;
-		}
-		#get-charts{
-			display: inline-block;
-			padding: 10px;
-			text-decoration: none;
-			color: #fff;
-			font-weight: bold;
-			background: blue;
-			margin: 0 auto;
-			border-radius: 5px;
-			margin: 0 0 20px 0;
-		}
-		.show{
-			display: flex;
-		}
-		.currency-wrap{
-			text-align: center;
-		}
-		table {
-			margin: 0 auto;
-		}
-		table td, table th{
-			padding: 5px;
-			background: #ccc;
-			text-align: center;
-			border: 1px solid black;
-		}
-	</style>
 	
 </body>
 </html>
