@@ -3,16 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="public/styles/login.css">
 </head>
 <body>
 	<form id="signin" method='post' action="/api/signin">
-		<label>Login: <input type="text" required name="name" class="form-name"></label>
-		<label>Password: <input type="password" name="password" required class="form-pass"></label>
+		<label for="name-input">Login</label>
+		<input type="text" id="name-input" required name="name" class="form-name">
+		<label for="pass-input">Password</label>
+		<input type="password" id="pass-input" name="password" required class="form-pass">
 		<input type="submit" name="" value="Sign in">
 		<button id="login">Login</button>
-	</form>
-	<a href="/currency">Currencies</a>
+	</form>	
 	<script src="public/scripts/login.js"></script>
+	<script src="public/scripts/signin.js"></script>
 	
 </body>
 </html>

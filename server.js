@@ -24,34 +24,11 @@ app.set('superSecret', 'secret19');
 
 router.post('/authenticate', routerContr.authorization);
 router.post('/signin', routerContr.userSignin);
-
-router.use(function(req, res, next) {  
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-  if (token) {   
-    jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
-      if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });    
-      } else {         	
-        req.decoded = decoded;       
-        next();
-      }
-    });
-
-  } else {  
-    return res.status(403).send({ 
-        success: false, 
-        message: 'No token provided.' 
-    });
-    
-  }
-});
-
+router.use(routerContr.authVerification);
 router.get('/', routerContr.getAllData);
 router.get('/date/:date', routerContr.getDataByDate);
 router.get('/resourses/:resours', routerContr.getResourses);
-router.get('/users', routerContr.getUsers)
-
+router.get('/users', routerContr.getUsers);
 app.use('/api', router);
 
 app.get('/', function(req, res) {		
