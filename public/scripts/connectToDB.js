@@ -46,10 +46,11 @@
 			document.body.innerHTML = '<h1>You are not authorized</h1><a href="/">Get Back</a>';
 			return;
 		} else {
-			fetch('http://localhost:5555/api', {
+			console.log(token)
+			fetch(`http://localhost:5555/api`, {
 				method: 'GET',
 				headers: {
-					'x-access-token' : token
+					'x-access-token': token
 				}
 			})
 				.then(data => data.json())

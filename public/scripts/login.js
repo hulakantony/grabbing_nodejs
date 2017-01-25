@@ -19,11 +19,12 @@ function handleLogin(e){
 		const success = JSON.parse(this.responseText).success; 				
 		if(success){
 			localStorage.setItem('auth_token', token);
-			window.location.href = `http://localhost:5555/currency`;
+			window.location.href = `http://localhost:8080/currency`;
 		} else {
 			alert('Wrong login or password');
 		}				
 	}
 	xhr.send(body);
 }		
-login.addEventListener('click', handleLogin)
+login.addEventListener('click', handleLogin);
+

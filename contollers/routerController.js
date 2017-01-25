@@ -4,9 +4,6 @@ const Currency = require('../models/DBSchemas').Currency;
 const User = require('../models/DBSchemas').User;
 const handleError = require('../helpers/errorHandler');
 const jwt = require('jsonwebtoken');
-const express = require('express');
-const app = express();
-app.set('superSecret', 'secret19');
 
 module.exports = {
 	getUsers: function(req, res) {
@@ -57,7 +54,8 @@ module.exports = {
 				})
 		}		
 	},
-	getAllData: function(req, res) {			
+	getAllData: function(req, res) {
+		console.log('ddddddddddd')			
 		Currency.find({}, function(err, currencies) {
 	  		if (err) throw err;  				
 	  		res.json(currencies);
@@ -77,7 +75,10 @@ module.exports = {
 			res.redirect('/');
 		});
 	},
-	authorization: function(req, res) { 
+	authorization: function(app) {
+
+		return function(req, res) { 
+			console.log(req.body.name)
 		User.findOne({
 			name: req.body.name
 		}, function(err, user) {
@@ -100,8 +101,10 @@ module.exports = {
 
 			}
 		});
+	}
 	},
-	authVerification: function(req, res, next) {  
+	authVerification: function (app) {
+		return function(req, res, next) {  
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
 		if (token) {   
@@ -120,5 +123,6 @@ module.exports = {
     			message: 'No token provided.' 
 			});
 		}
+	}
 	}
 }
