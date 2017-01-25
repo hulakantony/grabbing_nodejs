@@ -41,18 +41,29 @@
 			})
 			lastUpdated = arr[arr.length-1].created_at;
 		}			
-
-		fetch('http://localhost:5555/api')
-			.then(data => data.json())
-			.then(data => {
-				sortDB(data);				
-				financeToChart(finance, 'finance.i.ua', '1');
-				financeToChart(privat, 'privat', '2');
-				financeToChart(kurs, 'kurs.com.ua', '3');
-				currToTable(finance, privat, kurs);				
-				document.getElementById('last-updated').innerHTML = new Date(lastUpdated).toLocaleTimeString()
-			})			
-			.catch(() => {console.log('Data not recieved')})
+		const token = localStorage.getItem('auth_token');
+		if(!token){
+			document.body.innerHTML = '<h1>You are not authorized</h1><a href="/">Get Back</a>';
+			return;
+		} else {
+			fetch('http://localhost:5555/api', {
+				method: 'GET',
+				headers: {
+					'x-access-token' : token
+				}
+			})
+				.then(data => data.json())
+				.then(data => {					
+					sortDB(data);				
+					financeToChart(finance, 'finance.i.ua', '1');
+					financeToChart(privat, 'privat', '2');
+					financeToChart(kurs, 'kurs.com.ua', '3');
+					currToTable(finance, privat, kurs);				
+					document.getElementById('last-updated').innerHTML = new Date(lastUpdated).toLocaleTimeString()
+				})			
+				.catch(() => {console.log('Data not recieved')})
+		}		
+		
 
 	}
 	function currToTable(finance, privat, kurs){		

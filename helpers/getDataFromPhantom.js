@@ -9,5 +9,3 @@ module.exports = function(callback) {
         callback(stdout.match(/{.+}/i)[0]);
     });
 };
-
-//"\w+":\d+\.\d\,"\w+":\d+\.\d+\,"\w+":\d+\.\d+\

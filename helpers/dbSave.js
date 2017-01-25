@@ -1,6 +1,6 @@
 const cheerio = require('cheerio');
 const request = require('request');
-const Currency = require('../DBSchemas').Currency;
+const Currency = require('../models/DBSchemas').Currency;
 
 const exec = require('./getDataFromPhantom');
 
