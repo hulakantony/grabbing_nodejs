@@ -52,7 +52,3 @@ table td, table th{
 	top: 20px;
 	right: 300px;
 }
-#signin {
-	display: flex;
-	flex-direction: column;
-}

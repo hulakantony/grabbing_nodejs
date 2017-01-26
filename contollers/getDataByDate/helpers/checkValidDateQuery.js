@@ -1,4 +1,4 @@
-module.exports.checkValidDateQuery = function (req) {
+module.exports = function (req) {
 	if(!req.query.y || !req.query.m || !req.query.d){		
 		return false;
 	}
@@ -16,16 +16,4 @@ module.exports.checkValidDateQuery = function (req) {
 	}
 
 	return true;
-}
-
-module.exports.checkValidResoursQuery = function (req) {
-	const resours = req.params.resours;	
-	if(resours === 'privat'){
-		return true;
-	} else if(resours === 'finance') {
-		return true;
-	} else if(resours === 'kurs') {
-		return true;
-	}
-	return false;
 }

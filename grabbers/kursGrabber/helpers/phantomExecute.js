@@ -6,8 +6,14 @@ module.exports = function(callback) {
     exec('phantomjs phantom.js', function(err, stdout){
         if(err) {
           throw err;
-        }          
-        callback(stdout.match(/{.+}/i)[0]);
+        }  
+        const out = stdout.match(/{.+}/i);
+        if(out) {
+        	callback(out[0]);
+        } else {
+        	callback('nodata');
+        }     
+        
     });
 	} catch(err) {
 		console.log(err)

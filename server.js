@@ -5,12 +5,12 @@ const app = express();
 const path = require('path');
 const fs = require('fs');
 const cron = require('node-cron');
-const saveToDB = require('./helpers/dbSave');
+const fromGrabbersToDB = require('./grabbers/');
 
 
-saveToDB();
+fromGrabbersToDB();
 cron.schedule('* * 6 * * *', function() {
-    saveToDB();
+    fromGrabbersToDB();
 });
 
 app.use('/public', express.static(path.join(__dirname, "public")));

@@ -11,10 +11,14 @@ page.open('http://kurs.com.ua/', function(status) {
    
     return cur;    
   });
-  console.log(JSON.stringify(courses));
+  if(courses){
+  	console.log(JSON.stringify(courses));
+  } else {
+  	console.log('');
+  }  
   phantom.exit();
 });
-//try catcj
+
 
 
 
