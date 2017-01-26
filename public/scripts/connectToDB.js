@@ -45,8 +45,7 @@
 		if(!token){
 			document.body.innerHTML = '<h1>You are not authorized</h1><a href="/">Get Back</a>';
 			return;
-		} else {
-			console.log(token)
+		} else {			
 			fetch(`http://localhost:5555/api`, {
 				method: 'GET',
 				headers: {
@@ -63,8 +62,7 @@
 					document.getElementById('last-updated').innerHTML = new Date(lastUpdated).toLocaleTimeString()
 				})			
 				.catch(() => {console.log('Data not recieved')})
-		}		
-		
+		}	
 
 	}
 	function currToTable(finance, privat, kurs){		

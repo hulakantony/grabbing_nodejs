@@ -14,6 +14,7 @@ page.open('http://kurs.com.ua/', function(status) {
   console.log(JSON.stringify(courses));
   phantom.exit();
 });
+//try catcj
 
 
 

@@ -55,7 +55,6 @@ module.exports = {
 		}		
 	},
 	getAllData: function(req, res) {
-		console.log('ddddddddddd')			
 		Currency.find({}, function(err, currencies) {
 	  		if (err) throw err;  				
 	  		res.json(currencies);
@@ -63,22 +62,31 @@ module.exports = {
 	},
 	userSignin: function(req, res) {
 		const name = req.body.name;
-		const pass = req.body.password;	
-		var user = new User({ 
-			name: name, 
-			password: pass	
-		});	
-		user.save(function(err) {
-			if (err) throw err;
+		const pass = req.body.password;		
+		User.findOne({
+			name: name
+		}, function(err, user) {
+			if(err) throw err;
+			if(!user) {
+				var user = new User({ 
+					name: name, 
+					password: pass	
+				});	
+				user.save(function(err) {
+					if (err) throw err;
 
-			console.log('User saved successfully');
-			res.redirect('/');
-		});
+					console.log('User saved successfully');
+					res.json({ success: true, message: 'User saved successfully' })					
+				});
+			} else {
+				res.json({ success: false, message: 'Username has already been used' });				
+			}	
+		})	
+		
 	},
 	authorization: function(app) {
 
-		return function(req, res) { 
-			console.log(req.body.name)
+		return function(req, res) { 			
 		User.findOne({
 			name: req.body.name
 		}, function(err, user) {
