@@ -4,14 +4,11 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const fs = require('fs');
-const cron = require('node-cron');
-const fromGrabbersToDB = require('./grabbers/');
+const startCronGrabberTask = require('./cron/tasks/saveGrabbersData/');
 
 
-fromGrabbersToDB();
-cron.schedule('* * 6 * * *', function() {
-    fromGrabbersToDB();
-});
+startCronGrabberTask();
+
 
 app.use('/public', express.static(path.join(__dirname, "public")));
 
